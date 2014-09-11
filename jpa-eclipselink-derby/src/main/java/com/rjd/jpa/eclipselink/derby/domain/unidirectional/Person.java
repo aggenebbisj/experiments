@@ -1,4 +1,4 @@
-package com.rjd.jpa.eclipselink.derby.domain;
+package com.rjd.jpa.eclipselink.derby.domain.unidirectional;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,10 +8,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Department implements Serializable {
+public class Person implements Serializable {
 
     @Id
     @GeneratedValue
@@ -19,14 +20,14 @@ public class Department implements Serializable {
 
     private String name;
 
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    private List<Employee> employees = new ArrayList<Employee>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID", nullable = false)
+    private List<Car> cars = new ArrayList<>();
 
-    public Department() {
-        super();
+    public Person() {
     }
 
-    public Department(String name) {
+    public Person(String name) {
         this.name = name;
     }
 
@@ -46,16 +47,15 @@ public class Department implements Serializable {
         this.name = name;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
+    public List<Car> getCars() {
+        return this.cars;
     }
 
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
     }
 
-    public void addEmployee(Employee employee) {
-        employee.setDepartment(this);
-        this.employees.add(employee);
+    public void addCar(Car car) {        
+        this.cars.add(car);
     }
 }

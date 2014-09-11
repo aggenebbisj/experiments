@@ -1,4 +1,4 @@
-package com.rjd.jpa.eclipselink.derby.domain;
+package com.rjd.jpa.eclipselink.derby.domain.bidirectional;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
