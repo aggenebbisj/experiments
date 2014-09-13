@@ -1,4 +1,4 @@
-package nl.rdj.rest.boundary;
+package nl.rdj.beer.boundary;
 
 public class BeerService {
     

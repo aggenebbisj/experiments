@@ -1,4 +1,4 @@
-package nl.rdj.rest;
+package nl.rdj.beer.boundary;
 
 import java.net.URI;
 import javax.json.Json;
@@ -15,7 +15,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import nl.rdj.rest.xml.Beer;
+import nl.rdj.beer.entity.Beer;
 
 @Path("beers")
 public class BeerResource {

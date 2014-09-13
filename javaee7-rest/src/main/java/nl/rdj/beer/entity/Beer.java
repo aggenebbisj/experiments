@@ -1,4 +1,4 @@
-package nl.rdj.rest.xml;
+package nl.rdj.beer.entity;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

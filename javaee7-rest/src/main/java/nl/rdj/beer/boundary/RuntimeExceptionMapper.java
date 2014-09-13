@@ -1,4 +1,4 @@
-package nl.rdj.rest;
+package nl.rdj.beer.boundary;
 
 
 import javax.ws.rs.core.Response;
