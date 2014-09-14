@@ -1,8 +1,13 @@
 package nl.rdj.beer.boundary;
 
+import java.math.BigDecimal;
 import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.json.Json;
 import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -20,10 +25,25 @@ import nl.rdj.beer.entity.Beer;
 @Path("beers")
 public class BeerResource {
     
+    private static final List<Beer> beers = 
+            Arrays.asList(
+                    new Beer("La Chouffe"), 
+                    new Beer("Karmeliet Tripel"), 
+                    new Beer("DennisBier"));
+    
     @GET
     public JsonArray beers() {
-        JsonObject object = Json.createObjectBuilder().add("brand", "La Chouffe").build();
-        return Json.createArrayBuilder().add(object).build();
+        JsonArrayBuilder result = Json.createArrayBuilder();
+                
+        beers.stream()                 
+             .map(beer -> toJsonObject(beer))
+             .forEach(jsonObject -> result.add(jsonObject));
+        
+        return result.build();
+    }
+
+    private JsonObject toJsonObject(Beer beer) {
+        return Json.createObjectBuilder().add("brand", beer.getBrand()).build();
     }
     
     @GET
