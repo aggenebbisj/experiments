@@ -41,6 +41,10 @@
                     </execution>
                 </executions> 
             </plugin>
+            
+            <!-- 
+                This plugin will enhance entities for OpenJPA
+            -->
             <plugin>
                 <groupId>org.apache.openjpa</groupId>
                 <artifactId>openjpa-maven-plugin</artifactId>
@@ -67,6 +71,44 @@
                         <version>2.3.0</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            
+            <!-- 
+                This plugin will take care of starting a Derby database
+                and creating the tables/data before integration testing
+                begins. It will then cleanup everything afterwards
+            -->       
+            <plugin>
+                <groupId>com.btmatthews.maven.plugins.inmemdb</groupId>
+                <artifactId>inmemdb-maven-plugin</artifactId>
+                <version>1.4.2</version>
+                <configuration>
+                    <monitorKey>inmemdb</monitorKey>
+                    <monitorPort>11527</monitorPort>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>run</id>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                            <daemon>true</daemon>
+                            <type>derby</type>
+                            <database>sample</database>
+                            <username>app</username>
+                            <password>app</password>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop</id>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                        <phase>post-integration-test</phase>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -95,15 +137,13 @@
             <version>10.9.1.0</version>
             <scope>test</scope>
         </dependency>
-        
-        <!-- Use this version to connect to embedded server 
+        <!-- Use this version to connect to embedded server -->
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
             <version>10.11.1.1</version>
             <scope>test</scope>
-        </dependency>
-        -->
+        </dependency>        
         
         <!-- Persistence provider -->
         <dependency>

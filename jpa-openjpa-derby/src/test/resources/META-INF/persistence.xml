@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+                http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
     <persistence-unit name="integration-test" transaction-type="RESOURCE_LOCAL">
         <class>com.rjd.jpa.eclipselink.derby.domain.bidirectional.Department</class>
         <class>com.rjd.jpa.eclipselink.derby.domain.bidirectional.Employee</class>
@@ -10,18 +13,13 @@
         <properties>
             <!-- JPA -->
             <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample;create=true"/>
             <property name="javax.persistence.jdbc.user" value="APP"/>
             <property name="javax.persistence.jdbc.password" value="APP"/>
-            
+                
             <!-- OpenJPA -->
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/>            
             <property name="openjpa.DynamicEnhancementAgent" value="false"/>
-                
-            <!-- Eclipselink -->
-            <!--<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>-->
-            <!--<property name="eclipselink.logging.logger" value="org.eclipse.persistence.logging.DefaultSessionLog"/>-->
-            <!--<property name="eclipselink.logging.level" value="FINE" />-->
         </properties>
     </persistence-unit>
 </persistence>

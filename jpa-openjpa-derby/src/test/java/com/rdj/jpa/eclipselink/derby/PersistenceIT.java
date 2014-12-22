@@ -29,9 +29,9 @@ public class PersistenceIT {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-//            setupBidirectional();
+            setupBidirectional();
 //            setupUnidirectional();
-//              setupTest();
+//            setupTest();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,13 +64,13 @@ public class PersistenceIT {
         em.persist(p);
     }
     
-    @Ignore
     @Test
     public void testEmployees() {
         List<Employee> resultList = em.createQuery("Select a From Employee a", Employee.class).getResultList();
         assertThat(resultList.size(), is(2));
     }
 
+    @Ignore
     @Test
     public void test_replace_collection_with_bidirectional_relation() {
         em.getTransaction().begin();
@@ -90,6 +90,7 @@ public class PersistenceIT {
      * This test will fail because JPA does an update before inserting the new records. 
      * The update will set the foreign key to null, which violates the not null constraint.
      */
+    @Ignore
     @Test
     public void test_replace_collection_with_unidirectional_relation() {
         em.getTransaction().begin();
